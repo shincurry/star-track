@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<title>Star Track</title>
+
+    <script src="./paper-full.min.js"></script>
+    <script type="text/paperscript" canvas="star-track-canvas">
+        function StarTrack(xx, yy) {
+            return {
+                center: {
+                    x: xx,
+                    y: yy
+                },
+                track: function(radius, startAngle, endAngle) {
+                    midAngle = (startAngle + endAngle) / 2.0
+                    var startPoint = [Math.sin(startAngle)*radius + this.center.x, Math.cos(startAngle)*radius + this.center.y];
+                    var midPoint = [Math.sin(midAngle)*radius + this.center.x, Math.cos(midAngle)*radius + this.center.y];
+                    var endPoint = [Math.sin(endAngle)*radius + this.center.x, Math.cos(endAngle)*radius + this.center.y];
+                    return new Path.Arc({
+                        from: startPoint,
+                        through: midPoint,
+                        to: endPoint,
+                        strokeColor: 'black'
+                    })
+                }
+            }
+        }
+
+        var starTrack = StarTrack(600, 600)
+        for (var i = 1; i < 60; i++) {
+            var random1 = Math.random()
+            var random2 = Math.random()
+            var random3 = Math.random()
+            var track = starTrack.track(600 * random1, Math.PI*2 * random2, Math.PI*2 * random3)
+            track.strokeWidth = 0.8 + (random1*10)%4/10.0
+            track.strokeColor = "#fffedc"
+        }
+
+    </script>
+    <link rel="stylesheet" href="./star.css" media="screen" title="no title" charset="utf-8">
+</head>
+
+<body>
+    <div>
+        <canvas id="star-track-canvas"></canvas>
+    </div>
+</body>

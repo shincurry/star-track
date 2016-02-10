@@ -1,0 +1,10 @@
+body {
+    background-image:-webkit-linear-gradient(90deg, #030a16, black);
+}
+
+#star-track-canvas {
+    margin: 0 auto;
+    display: block;
+    width: 1200px;
+    height: 1200px;
+}
